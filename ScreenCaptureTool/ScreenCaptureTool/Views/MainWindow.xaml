@@ -1,0 +1,32 @@
+﻿<Window x:Class="ScreenCaptureTool.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        Title="MainView" Height="275" Width="500" ResizeMode="NoResize" Closing="OnWindowClosing"
+        DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="114" Orientation="Horizontal" Margin="15,0,23,0">
+            <Button Margin="5,0,5,0" 
+                    Command="{Binding CaptureScreenshotCommand}"
+                    Width="100" Height="50" 
+                    Background="#FF5EB062" Foreground="WhiteSmoke"
+                    FontWeight="Bold">Capture Image</Button>
+            <Button 
+                    Margin="5,0,5,0" Width="100" Height="50">Capture Video</Button>
+            <Button Command="{Binding UploadImageCommand}"
+                    Margin="5,0,5,0" Width="100" Height="50">Upload</Button>
+        </StackPanel>
+        <tb:TaskbarIcon x:Name="TrayIcon"
+                        IconSource="/Icons/Computers.ico"
+                        DoubleClickCommand="{Binding OpenCommand}"
+                        ToolTipText="ScreenCapture">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Open/Hide" FontWeight="Bold" Command="{Binding OpenCommand}"/>
+                    <Separator/>
+                    <MenuItem Header="Exit" Command="{Binding ExitCommand}"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+    </Grid>
+</Window>
